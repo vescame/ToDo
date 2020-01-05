@@ -50,13 +50,10 @@ namespace ToDo.Services.UserServices
 
         public async Task<User> UpdateUser(User updatedUser)
         {
-            var user = this.worker.UserRepository.GetByIdAsync(updatedUser.Id);
-
-            if (user == null) throw new Exception();
-
             try
             {
                 this.worker.UserRepository.Update(updatedUser);
+
                 await this.worker.CommitAsync();
             }
             catch (Exception e)
